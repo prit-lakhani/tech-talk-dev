@@ -8,6 +8,7 @@ const { cacheGet, cacheAdd } = require("./../config/RedisClient");
 const ReputationHistory = require("../models/mongodb/ReputationHistory");
 
 exports.handle_request = (payload, callback) => {
+  console.log('handle_request');
   const { action } = payload;
   switch (action) {
     case actions.REGISTER_USER:
@@ -69,6 +70,7 @@ const createUser = async (payload, callback) => {
   }
 
   const hashedPassword = bcrypt.hashSync(password, 10);
+  console.log(hashedPassword)
   const newMember = await new User({
     email: email.toLowerCase(),
     password: hashedPassword,
@@ -91,7 +93,12 @@ const login = async (payload, callback) => {
   if (member === null) {
     return callback({ error: `Email ${email} is not registered with us` }, null);
   }
+  console.log(member)
+  console.log(member.password)
+  console.log(bcrypt.hashSync(password, 10))
+  console.log(password)
   if (!bcrypt.compareSync(password, member.password)) {
+    
     return callback({ error: "Incorrect password. Please try again!" }, null);
   }
 

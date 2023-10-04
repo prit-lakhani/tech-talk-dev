@@ -1,8 +1,8 @@
 const kafka = require("kafka-node");
 const latestoffset = require("./latest-offset");
 
-//TODO -  - We should create a single producer object and reuse that instead of
-//creating producers for pushing each message
+// TODO - We should create a single producer object and reuse that instead of
+// creating producers for pushing each message
 exports.getProducer = () => {
   var client = new kafka.KafkaClient("localhost:2181");
   var HighlevelProducer = kafka.HighLevelProducer;

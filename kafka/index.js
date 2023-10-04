@@ -28,7 +28,7 @@ app.use("/api/chat", require("./routes/messageRoutes"));
 app.use("/api/tags", require("./routes/tagRoutes"));
 
 app.listen(PORT, (req, res) => {
-  console.log("Kafka middleare ");
+  console.log("Kafka middleware ");
 });
 
 module.exports = app

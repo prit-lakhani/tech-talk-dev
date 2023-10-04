@@ -1,16 +1,20 @@
 const express = require("express");
 const app = express();
+const cors = require("cors"); // Import the cors package
 const { sequelize } = require("./models/mysql/index");
 const dotenv = require("dotenv");
 
 dotenv.config();
 
-const PORT = process.env.PORT || 8585;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
+// Configure CORS middleware
+app.use(cors()); 
+
 const mongoDbUrl =
-  "mongodb+srv://admin:admin@cluster0.ureynvj.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://admin:admin@cluster0.0nabobe.mongodb.net/?retryWrites=true&w=majority";
 const mongoose = require("mongoose");
 
 var options = {
@@ -37,9 +41,11 @@ const BadgeService = require("./services/BadgeService");
 const TagService = require("./services/TagService");
 
 function handleTopicRequest(topic_name, serviceObject) {
+  console.log('handleTopicRequest');
   kafkaConection.getConsumer(topic_name, (consumer) => {
+    console.log('consumer', consumer);
     var producer = kafkaConection.getProducer();
-
+    console.log('producer', producer);
     consumer.on("message", function (message) {
       var data = JSON.parse(message.value);
       const { payload, correlationId } = data;
