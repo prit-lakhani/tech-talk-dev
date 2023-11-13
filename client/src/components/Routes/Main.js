@@ -17,6 +17,7 @@ import Messages from '../Messages/Messages'
 import Chat from '../Messages/Chat'
 import EditQuestion from '../Dashboard/Questions/EditQuestion'
 import Postactivity from '../Dashboard/Questions/Postactivity'
+import InstantAnswer from '../Dashboard/Questions/InstantAnswer'
 const Main = () => {
     return (
         <div>
@@ -31,6 +32,7 @@ const Main = () => {
                         <Route path="/Dashboard/Users" element={<UsersHome />} />
                         <Route path="/User/:userid" element={<User />} />
                         <Route path="/askQuestion" element={<AskQuestion />} />
+                        <Route path="/getAnswer" element={<InstantAnswer />} />
                         <Route path="/editQuestion/:questionId" element={<EditQuestion />} />
                         <Route path="/Messages" element={<Messages />} />
                         <Route path="/messages/chat/:roomId" element={<Chat />} />

@@ -20,6 +20,9 @@ const MainTopCard = () => {
   const askquestion = () => {
     navigate('/askQuestion')
   }
+  const getanswer = () => {
+    navigate('/getAnswer')
+  }
   const openInteresting = async()=>{
     const res = await axios.get(`${Constants.uri}/api/post/dashboard/?filterBy=interesting`);
     dispatch(postReducer(res.data.questionsForDashboard));
@@ -54,7 +57,10 @@ const MainTopCard = () => {
             <text style={{ fontSize: "1.9rem", PaddingBottom: "1rem" }}>All Questions</text>
           </Col>
           <Col>
-            <Button style={{backgroundColor:"hsl(206deg 100% 52%)"}} onClick={askquestion}>Ask Question</Button>
+            <Button style={{backgroundColor:"hsl(206deg 100% 52%)", marginLeft: "-75px"}} onClick={askquestion}>Ask Question</Button>
+          </Col>
+          <Col>
+            <Button style={{ backgroundColor: "hsl(200, 60%, 35%)", marginRight: "15px" }} onClick={getanswer}>Get Instant Answer</Button>
           </Col>
         </Row>
         <Row style={{ marginTop: "2rem" }}>
