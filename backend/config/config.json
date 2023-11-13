@@ -3,7 +3,7 @@
     "username": "admin",
     "password": "adminadmin",
     "database": "development",
-    "host": "tech-talk-dev.clgwq2ex495w.us-east-1.rds.amazonaws.com",
+    "host": "tech-talk-dev.ctyl5ghy7ddl.us-west-2.rds.amazonaws.com",
     "dialect": "mysql",
     "logging": true
   },
