@@ -1,0 +1,102 @@
+cd workspace/kafka_2.13-3.5.1
+bin/zookeeper-server-start.sh config/zookeeper.properties
+bin/kafka-server-start.sh config/server.properties
+
+sh bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic acknowledge partitions 1 --replication-factor 1
+
+
+
+CREATE TABLE development.user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    photo VARCHAR(255),
+    about VARCHAR(255),
+    is_admin BOOLEAN DEFAULT false,
+    reputation INT NOT NULL DEFAULT 1,
+    location VARCHAR(255),
+    registered_on DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_login_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    gold_badges_count INT UNSIGNED NOT NULL DEFAULT 0,
+    silver_badges_count INT UNSIGNED NOT NULL DEFAULT 0,
+    bronze_badges_count INT UNSIGNED NOT NULL DEFAULT 0
+);
+
+CREATE TABLE development.post (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    type ENUM('QUESTION', 'ANSWER') NOT NULL,
+    status ENUM('ACTIVE', 'PENDING') NOT NULL,
+    title VARCHAR(255),
+    body TEXT NOT NULL,
+    tags VARCHAR(255),
+    score INT NOT NULL DEFAULT 0,
+    views_count INT UNSIGNED NOT NULL DEFAULT 0,
+    parent_id INT,
+    answers_count INT UNSIGNED NOT NULL DEFAULT 0,
+    accepted_answer_id INT,
+    created_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    modified_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    owner_id INT NOT NULL,
+    FOREIGN KEY (owner_id) REFERENCES user(id),
+    FOREIGN KEY (parent_id) REFERENCES post(id),
+    FOREIGN KEY (accepted_answer_id) REFERENCES post(id)
+);
+
+CREATE TABLE development.bookmark (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    created_on DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    post_id INT NOT NULL,
+    user_id INT NOT NULL,
+    CONSTRAINT fk_post FOREIGN KEY (post_id) REFERENCES post(id),
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+CREATE TABLE development.vote (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    type ENUM('UPVOTE', 'DOWNVOTE') NOT NULL,
+    created_on DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    post_id INT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (post_id) REFERENCES post(id),
+    FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+CREATE TABLE development.post_tag (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    created_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    post_id INT NOT NULL,
+    tag_id INT NOT NULL,
+    FOREIGN KEY (post_id) REFERENCES post(id),
+    FOREIGN KEY (tag_id) REFERENCES tag(id)
+);
+
+CREATE TABLE development.badge (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    type ENUM('BRONZE', 'SILVER', 'GOLD') NOT NULL,
+    awarded_on DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    CONSTRAINT unique_badge_user UNIQUE (name, type, user_id)
+);
+
+CREATE TABLE development.tag (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    description VARCHAR(255),
+    created_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    admin_id INT NOT NULL,
+    FOREIGN KEY (admin_id) REFERENCES user(id)
+);
+
+CREATE TABLE development.comment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    content VARCHAR(255) NOT NULL,
+    user_display_name VARCHAR(255) NOT NULL,
+    posted_on DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    post_id INT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (post_id) REFERENCES post(id),
+    FOREIGN KEY (user_id) REFERENCES user(id)
+);
