@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Card, Button } from 'react-bootstrap'
 import './styles.css'
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import img1 from '../../images/santhoshProfPic.jpg'
+import img1 from '../../images/prerna_image.jpeg'
 import axios from 'axios';
 import Constants from './../../util/Constants.json'
 import { useParams } from 'react-router';

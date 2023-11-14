@@ -5,7 +5,7 @@ import { useState } from "react";
 import Axios from "axios";
 import Constants from "../util/Constants.json";
 import { useNavigate } from "react-router";
-import logo from "./../images/stackoverflow_logo.png";
+import logo from "./../images/tech_talk_cropped.png";
 
 const Register = (props) => {
   const navigate = useNavigate();

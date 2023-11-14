@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from 'js-cookie'
 import SideMenu from './Dashboard/DashboardCards/SideMenu'
-import logo from './images/stackoverflowlogo.PNG'
+import logo from './images/tech_talk_cropped.png'
 import Login from './Login/Login'
 import Register from './Register/Register'
 import { logoutPending, logoutSuccess } from '../features/logout';

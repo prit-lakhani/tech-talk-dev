@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Row, Modal } from 'react-bootstrap';
 import SideMenu from '../Dashboard/DashboardCards/SideMenu';
-import profpic from '../images/santhoshProfPic.jpg'
+import profpic from '../images/prerna_image.jpeg'
 import ProfileSubTab from './ProfileSubTab'
 import ActivitySubTab from './ActivitySubTab'
 import Axios from 'axios'

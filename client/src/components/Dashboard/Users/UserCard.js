@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Card, InputGroup, FormControl } from 'react-bootstrap'
-import pic1 from '../../images/santhoshProfPic.jpg'
+import pic1 from '../../images/prerna_image.jpeg'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
 import emptyuserimage from '../../images/emptyimage.png'

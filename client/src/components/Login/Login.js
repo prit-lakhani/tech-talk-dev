@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginSuccess, loginFail, loginPending } from './../../features/login'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import logo from './../images/stackoverflow_logo.png'
+import logo from './../images/tech_talk_cropped.png'
 
 const Login = (props) => {
     const navigate = useNavigate();
