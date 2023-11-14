@@ -77,7 +77,7 @@ const Register = (props) => {
   return (
     <Modal
       {...props}
-      size="sm"
+      size="sl"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
@@ -87,10 +87,10 @@ const Register = (props) => {
       <Modal.Body className="signmodalbody">
         <Image
           className="center"
-          style={{ marginLeft: "40%", marginRight: "50%" }}
+          style={{ marginLeft: "35%", marginRight: "50%" }}
           src={logo}
-          width={45}
-          height={45}
+          width={120}
+          height={65}
         />
         {errors && <Alert variant="danger">{errors}</Alert>}
 

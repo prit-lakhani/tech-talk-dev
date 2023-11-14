@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router'
 import { useLocation } from 'react-router'
 import parse from 'html-react-parser'
 import emptyimage from '../../images/emptyimage.png'
+import {Helmet} from 'react-helmet';
 
 const Search = () => {
     const location = useLocation();
@@ -149,6 +150,9 @@ const Search = () => {
 
     return (
         <div>
+            <Helmet>
+                <style>{'body { background-color: beige; }'}</style>
+            </Helmet>
             <Row>
                 <Col sm={2}>
 

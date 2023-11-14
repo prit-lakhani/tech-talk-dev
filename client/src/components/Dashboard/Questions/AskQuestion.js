@@ -12,6 +12,7 @@ import Login from './../../Login/Login'
 import Cookies from 'js-cookie'
 import save from '../../util/Util.js'
 import Compress from 'compress.js'
+import {Helmet} from 'react-helmet';
 const AskQuestion = () => {
     const compress = new Compress()
     const obj = useSelector(state => state.QuestionBodySlice);
@@ -103,11 +104,14 @@ const AskQuestion = () => {
     }
     }
     return (
-        <div style={{ backgroundColor: "#f2f2f2", width: "auto", height: "60rem" }}>
+        <div style={{ backgroundColor: "beige", width: "auto", height: "60rem" }}>
+            <Helmet>
+                <style>{'body { background-color: beige; }'}</style>
+            </Helmet>
             <Row>
                 <Col sm={2}></Col>
                 <Col style={{ marginTop: "30px" }}>
-                    <text style={{ fontSize: "30px" }}>Ask a public question</text>
+                    <text style={{ fontSize: "30px" }}>Ask your question</text>
                 </Col>
                 <Col>
                     <img style={{ width: "33rem" }} src={questionlogo}></img>
@@ -119,11 +123,11 @@ const AskQuestion = () => {
                     <Card style={{ width: "53rem" }}>
                         <div style={{ margin: "1rem", display: "flex", flexDirection: "column" }}>
                             <Card.Title>
-                                Title
+                                Question Title
                             </Card.Title>
                             <text>Be specific and imagine you’re asking a question to another person</text>
                             <input style={{ marginBottom: "20px" }} name="title" value={title} onChange={(e) => onChangeData(e)}></input>
-                            <Card.Title>Body</Card.Title>
+                            <Card.Title>Question Explanation</Card.Title>
                             <text>Include all the information someone would need to answer your question</text>
                             {//<RichTextEditor value={state} onChange={onChange} />
                             }
@@ -146,7 +150,7 @@ const AskQuestion = () => {
                             
                             <br />
                             <Card.Title>
-                                Tags
+                                Topic Tags
                             </Card.Title>
                             <text>Add up to 5 tags to describe what your question is about</text>
                             <input name="tags" value={tags} placeholder="Eg: java,android,oop" onChange={(e) => onChangeData(e)}></input>

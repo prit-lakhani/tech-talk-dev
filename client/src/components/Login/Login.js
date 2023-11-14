@@ -62,7 +62,7 @@ const Login = (props) => {
     return (
         <Modal
             {...props}
-            size="sm"
+            size="sl"
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
@@ -72,7 +72,7 @@ const Login = (props) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className="signmodalbody">
-                <Image className='center' style={{ marginLeft: '40%', marginRight: '50%' }} src={logo} width={45} height={45} />
+                <Image className='center' style={{ marginLeft: '35%', marginRight: '50%' }} src={logo} width={120} height={65} />
                 {error && <Alert variant="danger">{error}</Alert>
                 }
 

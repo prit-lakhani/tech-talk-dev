@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux'
 import { postReducer,titleReducer } from '../../../features/PostSlice'
 import Constants from  '../../util/Constants.json'
 import axios from 'axios'
+import {Helmet} from 'react-helmet';
+
 const MainTopCard = () => {
   const dispatch = useDispatch();
   const obj = useSelector(state => state.DashboardTopSlice)
@@ -52,6 +54,9 @@ const MainTopCard = () => {
   return (
     <div>
       <div style={{ marginTop: "1rem", marginLeft: "-15px" }}>
+      <Helmet>
+                <style>{'body { background-color: beige; }'}</style>
+        </Helmet>
         <Row>
           <Col sm={9}>
             <text style={{ fontSize: "1.9rem", PaddingBottom: "1rem" }}>All Questions</text>
