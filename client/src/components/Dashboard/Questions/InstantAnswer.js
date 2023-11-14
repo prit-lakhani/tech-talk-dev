@@ -7,30 +7,43 @@ const InstantAnswer = () => {
   const [response, setResponse] = useState('');
 
   const getAnswer = async () => {
-    //const appendedPrompt = "Answer this question only if it is a technology related question, else deny it, If it is a code help, answer the code with heading 'code:'" + textPrompt;
-    const appendedPrompt = "Answer in 100 words"+ textPrompt;
-    const requestBody = {
-      model: "gpt-3.5-turbo",
-      messages: [
-        //{ role: "system", content: "You are a Technical helpful assistant that helps answering Technology, Computer science, coding related questions" },
-        { role: "user", content: appendedPrompt }
-      ]
-    };
+    const maxRetries = 3;
+    let retries = 0;
 
-    try {
-      const response = await axios.post('https://api.openai.com/v1/chat/completions', requestBody, {
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-          'Authorization': 'Bearer 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' // Replace with your API key
+    while (retries < maxRetries) {
+      try {
+        const appendedPrompt = "Answer in 100 words" + textPrompt;
+        const requestBody = {
+          model: "gpt-3.5-turbo",
+          messages: [
+            { role: "user", content: appendedPrompt }
+          ]
+        };
+
+        const response = await axios.post('https://api.openai.com/v1/chat/completions', requestBody, {
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Authorization': 'Bearer ' // Replace with your API key
+          }
+        });
+
+        const responseData = response.data;
+        setResponse(responseData.choices[0].message.content);
+
+        // Break out of the loop if successful
+        break;
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          // If rate limited, wait before retrying
+          const delay = Math.pow(2, retries) * 1000; // Exponential backoff
+          await new Promise(resolve => setTimeout(resolve, delay));
+          retries++;
+        } else {
+          console.error("Error fetching response from ChatGPT", error);
+          // Handle other errors or display an error message to the user
+          break; // Break out of the loop for other errors
         }
-      });
-
-      const responseData = response.data;
-
-      setResponse(responseData.choices[0].message.content);
-    } catch (error) {
-      console.error("Error fetching response from ChatGPT", error);
-      // Handle errors or display an error message to the user
+      }
     }
   };
 
@@ -43,7 +56,7 @@ const InstantAnswer = () => {
       <h3 style={{ textAlign: 'center', margin: '20px 0', fontSize: '24px', color: '#333' }}>Get Instant Help</h3>
       <Form>
         <Form.Group>
-        <h5>Enter your question</h5>
+          <h5>Enter your question</h5>
           <Form.Control
             as="textarea"
             rows={14}
