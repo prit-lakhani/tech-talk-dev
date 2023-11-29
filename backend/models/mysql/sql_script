@@ -2,8 +2,9 @@ cd workspace/kafka_2.13-3.5.1
 bin/zookeeper-server-start.sh config/zookeeper.properties
 bin/kafka-server-start.sh config/server.properties
 
-sh bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic acknowledge partitions 1 --replication-factor 1
-
+sh bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic posts partitions 1 --replication-factor 1
+lsof -i :2181
+kill -9 PID
 
 
 CREATE TABLE development.user (

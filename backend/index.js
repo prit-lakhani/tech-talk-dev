@@ -12,6 +12,12 @@ app.use(express.json());
 
 // Configure CORS middleware
 app.use(cors()); 
+// app.use(cors({
+//   methods: 'GET,POST,PATCH,DELETE,OPTIONS',
+//   optionsSuccessStatus: 200,
+//   origin: 'http://tech-talk-dev-s3-bucket.s3-website-us-west-2.amazonaws.com/'
+// }));
+// app.options('*', cors());
 
 const mongoDbUrl =
   "mongodb+srv://admin:admin@cluster0.0nabobe.mongodb.net/?retryWrites=true&w=majority";
