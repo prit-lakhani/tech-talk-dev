@@ -23,7 +23,7 @@ const InstantAnswer = () => {
         const response = await axios.post('https://api.openai.com/v1/chat/completions', requestBody, {
           headers: {
             'Content-Type': 'application/json;charset=UTF-8',
-            'Authorization': 'Bearer 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'
+            'Authorization': 'Bearer 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'
           }
         });
 
